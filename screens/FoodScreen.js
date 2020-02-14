@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
+import FoodListItem from '../components/FoodListItem'
 
 export default function FoodScreen() {
 
@@ -54,10 +55,22 @@ export default function FoodScreen() {
 
   return (
     <View style={styles.container}>
+      <TextInput
+          style={styles.textInputStyle}
+          // onChangeText={text => this.SearchFilterFunction(text)}
+          // value={this.state.text}
+          underlineColorAndroid="transparent"
+          placeholder="Search..."
+        />
       <FlatList
         data={meals}
         renderItem={({item}) => ( 
-          <Text>{item.strMeal}</Text> 
+          <FoodListItem 
+              title={item.strMeal}
+              category={item.strCategory}
+              area={item.strArea}
+              image={item.strMealThumb}
+            />
         )}
       />
     </View>
@@ -81,5 +94,12 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 15,
+  },
+  textInputStyle: {
+    height: 40,
+    borderWidth: 1,
+    paddingLeft: 10,
+    borderColor: '#dddddd',
+    backgroundColor: '#FFFFFF',
   },
 });
